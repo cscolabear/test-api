@@ -1,0 +1,8 @@
+AddHandler application/x-httpd-php71 .php .php5 .php4 .php3
+
+DirectoryIndex public/index.php
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . public/index.php [L]
