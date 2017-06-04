@@ -1,6 +1,10 @@
 <?php
 // Routes
 
+$app->get('/', function ($request, $response, $args) {
+    return 'Welcome Test-API';
+});
+
 // $app->get('/[{name}]', function ($request, $response, $args) {
 //     // Sample log message
 //     $this->logger->info("Slim-Skeleton '/' route");
@@ -18,7 +22,7 @@
  * get parames: page: 1~N, amount: 1~N
  * @return  string    json string
  */
-$app->get('/api/get/article_list', function ($request, $response, $args) {
+$app->get('/get/article_list', function ($request, $response, $args) {
     $params = $request->getQueryParams();
     $page = $params['page'] ?? 1;
     $amount = $params['amount'] ?? \Src\Models\Article::AMOUNT;
@@ -32,10 +36,10 @@ $app->get('/api/get/article_list', function ($request, $response, $args) {
 
 /**
  * 取得指定 id 之文章
- * e.g. /api/get/article/2 or /api/get/article/3
+ * e.g. /get/article/2 or /get/article/3
  * @return  string    json string
  */
-$app->get('/api/get/article/{id}', function ($request, $response, $args) {
+$app->get('/get/article/{id}', function ($request, $response, $args) {
     $arg_id = $args['id'] ?? null;
     $id = filter_var($arg_id, FILTER_SANITIZE_NUMBER_INT);
     if (! $id) {
@@ -54,10 +58,10 @@ $app->get('/api/get/article/{id}', function ($request, $response, $args) {
 
 /**
  * 刪除指定 id 之文章
- * e.g. /api/delete/article/2 or /api/delete/article/3
+ * e.g. /delete/article/2 or /delete/article/3
  * @return  string    json string
  */
-$app->get('/api/delete/article/{id}', function ($request, $response, $args) {
+$app->get('/delete/article/{id}', function ($request, $response, $args) {
     $arg_id = $args['id'] ?? null;
 
     $this->db;
@@ -73,10 +77,10 @@ $app->get('/api/delete/article/{id}', function ($request, $response, $args) {
 
 /**
  * 還原刪除指定 id 之文章
- * e.g. /api/restore/article/2 or /api/restore/article/3
+ * e.g. /restore/article/2 or /restore/article/3
  * @return  string    json string
  */
-$app->get('/api/restore/article/{id}', function ($request, $response, $args) {
+$app->get('/restore/article/{id}', function ($request, $response, $args) {
     $arg_id = $args['id'] ?? null;
 
     $this->db;
@@ -92,10 +96,10 @@ $app->get('/api/restore/article/{id}', function ($request, $response, $args) {
 
 /**
  * 新增文章
- * e.g. /api/add/article or /api/add/article
+ * e.g. /add/article or /add/article
  * @return  string    json string
  */
-$app->post('/api/add/article', function ($request, $response, $args) {
+$app->post('/add/article', function ($request, $response, $args) {
     $params = $request->getParsedBody();
     $inputs = [
         'title'       => $params['title'] ?? '',
