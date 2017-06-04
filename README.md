@@ -26,7 +26,10 @@
 # API list
 
 - `get` : 取得文章列表
-`/test_api/get/article_list`
+`/test_api/get/article_list`<br>
+`/test_api/get/article_list?page=1&amount=10`<br>
+page: 指定頁數, 預設 1
+amount: 指定每頁筆數, 預設 5 筆, 至多 50 筆
 
 - `get` : 取得文章 id = 1
 `/test_api/get/article/1`
