@@ -1,26 +1,47 @@
-# Slim Framework 3 Skeleton Application
+# 隨手用 Slim 3 Framework 做的簡單 API
+使用套件：
+- slim3 frame
+- phpdotenv
+- Eloquent
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3 with the PHP-View template renderer. It also uses the Monolog logger.
+因為種種原因，簡單處理
+也不使用完整的 restful...
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+# .env
+複制 .env.example 為 .env
+- 填入 db 設定
+- ROOT_URL 可以留空
+(沒有自己的 domain 使用 subdirectory route 會有問題，slim3 手冊上還沒找到解決方式; 故用這個方法解決)
 
-## Install the Application
+# requirement
+- php7+
+- apache + url rewrite
+- mysql
 
-Run this command from the directory in which you want to install your new Slim Framework application.
+# how to start
+- 設定 .env
+- compose install
+- 利用 storage/*.sql 建立 table...
 
-    php composer.phar create-project slim/slim-skeleton [my-app-name]
+# API list
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
+- `get` : 取得文章列表
+`/test_api/get/article_list`
 
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writeable.
+- `get` : 取得文章 id = 1
+`/test_api/get/article/1`
 
-To run the application in development, you can also run this command. 
+- `get` : 刪除文章 id=1, soft delete
+`/test_api/delete/article/1`
 
-	php composer.phar start
+- `get` : 還原刪除文章 id=1
+`/test_api/restore/article/1`
 
-Run this command to run the test suite
+- `post` : 新增文章
+`/test_api/add/article`<br>
+form POST 欄位<br>
+title: req, min: 3, max: 120<br>
+description: req, min: 3, max: 255<br>
+image: url format<br>
+content:  req, min: 5, max: 65535<br>
 
-	php composer.phar test
-
-That's it! Now go build something cool.
