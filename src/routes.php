@@ -1,5 +1,8 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+
 // Routes
+
 
 $app->get(getenv('ROOT_URL') . '/', function ($request, $response, $args) {
     return 'Welcome Test-API';
@@ -100,7 +103,8 @@ $app->get(getenv('ROOT_URL') . '/restore/article/{id}', function ($request, $res
  * @return  string    json string
  */
 $app->post(getenv('ROOT_URL') . '/add/article', function ($request, $response, $args) {
-    $params = $request->getParsedBody();
+    // $params = $request->getParsedBody();
+    $params = $_POST;
     $inputs = [
         'title'       => $params['title'] ?? '',
         'description' => $params['description'] ?? '',
