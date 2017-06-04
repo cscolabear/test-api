@@ -35,15 +35,15 @@ class Article extends BaseModel
             ->get();
     }
 
-    public function InputValidation(array $inputs): array
+    public function InputValidation(array $inputs)
     {
-        $min = self::FILED_RULE['title']['min'];
-        $max = self::FILED_RULE['title']['max'];
-        $valid['title'] = preg_match("/^[\w\d]{{$min},{$max}}$/", $inputs['title'] ?? '');
+        $strlen = mb_strlen( $inputs['title'] ?? '', "utf-8");
+        $valid['title'] = ($strlen >= self::FILED_RULE['title']['min']
+            && $strlen <= self::FILED_RULE['title']['max']);
 
-        $min = self::FILED_RULE['description']['min'];
-        $max = self::FILED_RULE['description']['max'];
-        $valid['description'] = preg_match("/^[\w\d]{{$min},{$max}}$/", $inputs['description'] ?? '');
+        $strlen = mb_strlen( $inputs['description'] ?? '', "utf-8");
+        $valid['description'] = ($strlen >= self::FILED_RULE['description']['min']
+            && $strlen <= self::FILED_RULE['description']['max']);
 
         $valid['image'] = true;
         if (filter_var($inputs['image'], FILTER_VALIDATE_URL) === false) {
@@ -51,9 +51,9 @@ class Article extends BaseModel
         }
 
         // 暫不處理 html
-        $min = self::FILED_RULE['content']['min'];
-        $max = self::FILED_RULE['content']['max'];
-        $valid['content'] = preg_match("/^[\w\d]{{$min},{$max}}$/", $inputs['content'] ?? '');
+        $strlen = mb_strlen( $inputs['content'] ?? '', "utf-8");
+        $valid['content'] = ($strlen >= self::FILED_RULE['content']['min']
+            && $strlen <= self::FILED_RULE['content']['max']);
 
         return array_map('boolval', $valid);
     }
