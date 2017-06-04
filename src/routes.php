@@ -1,7 +1,7 @@
 <?php
 // Routes
 
-$app->get('/', function ($request, $response, $args) {
+$app->get(getenv('ROOT_URL') . '/', function ($request, $response, $args) {
     return 'Welcome Test-API';
 });
 
@@ -22,7 +22,7 @@ $app->get('/', function ($request, $response, $args) {
  * get parames: page: 1~N, amount: 1~N
  * @return  string    json string
  */
-$app->get('/get/article_list', function ($request, $response, $args) {
+$app->get(getenv('ROOT_URL') . '/get/article_list', function ($request, $response, $args) {
     $params = $request->getQueryParams();
     $page = $params['page'] ?? 1;
     $amount = $params['amount'] ?? \Src\Models\Article::AMOUNT;
@@ -39,7 +39,7 @@ $app->get('/get/article_list', function ($request, $response, $args) {
  * e.g. /get/article/2 or /get/article/3
  * @return  string    json string
  */
-$app->get('/get/article/{id}', function ($request, $response, $args) {
+$app->get(getenv('ROOT_URL') . '/get/article/{id}', function ($request, $response, $args) {
     $arg_id = $args['id'] ?? null;
     $id = filter_var($arg_id, FILTER_SANITIZE_NUMBER_INT);
     if (! $id) {
@@ -61,7 +61,7 @@ $app->get('/get/article/{id}', function ($request, $response, $args) {
  * e.g. /delete/article/2 or /delete/article/3
  * @return  string    json string
  */
-$app->get('/delete/article/{id}', function ($request, $response, $args) {
+$app->get(getenv('ROOT_URL') . '/delete/article/{id}', function ($request, $response, $args) {
     $arg_id = $args['id'] ?? null;
 
     $this->db;
@@ -80,7 +80,7 @@ $app->get('/delete/article/{id}', function ($request, $response, $args) {
  * e.g. /restore/article/2 or /restore/article/3
  * @return  string    json string
  */
-$app->get('/restore/article/{id}', function ($request, $response, $args) {
+$app->get(getenv('ROOT_URL') . '/restore/article/{id}', function ($request, $response, $args) {
     $arg_id = $args['id'] ?? null;
 
     $this->db;
@@ -99,7 +99,7 @@ $app->get('/restore/article/{id}', function ($request, $response, $args) {
  * e.g. /add/article or /add/article
  * @return  string    json string
  */
-$app->post('/add/article', function ($request, $response, $args) {
+$app->post(getenv('ROOT_URL') . '/add/article', function ($request, $response, $args) {
     $params = $request->getParsedBody();
     $inputs = [
         'title'       => $params['title'] ?? '',
